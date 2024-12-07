@@ -4,5 +4,5 @@ return [
     'db_name' => 'tintuc',
     'db_user' => 'root',
     'db_pass' => '',
-    'base_url' => 'http://localhost/project'  // Sửa URL cho phù hợp
+    'base_url' => 'http://localhost/ZeroNineWeb'  
 ];

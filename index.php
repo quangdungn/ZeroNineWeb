@@ -1,5 +1,5 @@
 <?php
-session_start(); // Chỉ gọi session_start() một lần ở đây
+session_start(); 
 
 $controller = isset($_GET['controller']) ? $_GET['controller'] : 'home';
 $action = isset($_GET['action']) ? $_GET['action'] : 'index';

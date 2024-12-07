@@ -27,14 +27,12 @@ class AdminController extends BaseController {
             $content = $_POST['content'];
             $category_id = $_POST['category_id'];
 
-            // Xử lý upload ảnh (nếu có)
             $image = $this->uploadImage('image');
 
             $this->newsModel->addNews($title, $content, $image, $category_id);
             $this->redirect('index.php?controller=admin&action=index');
         } else {
             $categories = $this->categoryModel->getAll();
-            // ở đây không cần lấy danh sách ảnh nữa vì ta cho upload từ máy.
             $this->render('admin/news_add', ['categories' => $categories]);
         }
     }
@@ -48,7 +46,6 @@ class AdminController extends BaseController {
             $item = $this->newsModel->getNewsById($id);
             $currentImage = $item['image'];
 
-            // Nếu người dùng chọn ảnh mới, upload. Không thì giữ ảnh cũ.
             $newImage = $this->uploadImage('image', $currentImage);
 
             $this->newsModel->updateNews($id, $title, $content, $newImage, $category_id);
@@ -77,11 +74,9 @@ class AdminController extends BaseController {
             $ext = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
             $allowed = ['jpg','jpeg','png','gif'];
             if(!in_array($ext, $allowed)) {
-                // Nếu không đúng định dạng, có thể return $oldImage hoặc rỗng.
                 return $oldImage;
             }
             
-            // Tạo tên file duy nhất
             $newFileName = uniqid() . '.' . $ext;
             $targetPath = $uploadDir . $newFileName;
             
